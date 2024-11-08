@@ -4,7 +4,7 @@ FROM python:3.9
 WORKDIR /app
 
 # Copia los archivos de la aplicación
-COPY . .
+COPY . . 
 
 # Instala las dependencias
 RUN pip install -r requirements.txt
