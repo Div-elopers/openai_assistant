@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openai-assistant
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: openai-assistant
+  template:
+    metadata:
+      labels:
+        app: openai-assistant
+    spec:
+      containers:
+        - name: openai-assistant
+          image: gcr.io/alamo-utec/openai_assistant_flask:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: OPENAI_API_KEY
+                  key: latest
+            - name: ASSISTANT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: ASSISTANT_ID
+                  key: latest
