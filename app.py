@@ -6,13 +6,10 @@ import openai
 from dotenv import load_dotenv
 from flask import Flask, request, jsonify
 
-# Initialize Firebase Admin SDK
 initialize_app()
 
-# Load environment variables
 load_dotenv()
 
-# Initialize OpenAI API client
 openai_api_key = os.getenv("OPENAI_API_KEY")
 assistant_id = os.getenv("ASSISTANT_ID")
 client = openai.OpenAI(api_key=openai_api_key)
