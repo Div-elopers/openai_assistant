@@ -104,5 +104,11 @@ def test_send_message_to_assistant():
     result = process_message_to_assistant(data)
     return jsonify(result)
 
+# Health check endpoint
+@app.route('/status', methods=['GET'])
+def status():
+    return jsonify({"status": "running", "message": "Service is up and running"}), 200
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
