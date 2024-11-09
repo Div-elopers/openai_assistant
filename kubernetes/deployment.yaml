@@ -29,9 +29,9 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: openai-api-key
-                  key: latest
+                  key: OPENAI_API_KEY
             - name: ASSISTANT_ID
               valueFrom:
                 secretKeyRef:
                   name: assistant-id
-                  key: latest
+                  key: ASSISTANT_ID 
