@@ -111,9 +111,8 @@ def status():
 
 # Saludo to the profes
 @app.route('/saludo', methods=['GET'])
-def status():
+def saludo():
     return jsonify({"Saludo content": "Hola, soy un nuevo endpoint!"}), 200
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
