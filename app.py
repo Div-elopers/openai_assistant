@@ -110,8 +110,8 @@ def status():
     return jsonify({"status": "running", "message": "Service is up and running"}), 200
 
 # Saludo to the profes
-@app.route('/saludo', methods=['GET'])
-def saludo():
+@app.route('/get_saludo', methods=['GET'])
+def get_saludo():
     return jsonify({"Saludo content": "Hola, soy un nuevo endpoint!"}), 200
 
 if __name__ == '__main__':
