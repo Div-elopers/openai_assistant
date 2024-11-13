@@ -109,11 +109,6 @@ def test_send_message_to_assistant():
 def status():
     return jsonify({"status": "running", "message": "Service is up and running"}), 200
 
-# Saludo to the profes
-@app.route('/saludo', methods=['GET'])
-def status():
-    return jsonify({"Saludo content": "Hola, soy un nuevo endpoint!"}), 200
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
