@@ -1,8 +1,27 @@
 steps:
+  # Paso 1: Construcción de la imagen
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/alamo-utec/openai_assistant_flask', '.']
+    
+  # Paso 2: Push de la imagen al registro de contenedores
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/alamo-utec/openai_assistant_flask']
+  
+  # Paso 3: Llamada a la API de Cloud Build usando el secreto para el trigger
+  - name: 'curlimages/curl'
+    entrypoint: 'sh'
+    args:
+      - '-c'
+      - |
+        DEPLOY_TRIGGER_PATH=$(gcloud secrets versions access latest --secret="DEPLOY_TRIGGER_PATH")
+        curl -X POST \
+          -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+          "https://cloudbuild.googleapis.com/v1/$DEPLOY_TRIGGER_PATH:run"
+    env:
+      - 'CLOUDSDK_COMPUTE_REGION=southamerica-east1'
+
+secrets:
+  - name: DEPLOY_TRIGGER_PATH  
 
 images:
   - 'gcr.io/alamo-utec/openai_assistant_flask'
