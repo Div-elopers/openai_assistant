@@ -15,15 +15,7 @@ steps:
       - |
         curl -X POST \
           -H "Authorization: Bearer $(gcloud auth print-access-token)" \
-          "https://cloudbuild.googleapis.com/v1/$DEPLOY_TRIGGER_PATH:run"
-    env:
-      - 'DEPLOY_TRIGGER_PATH'
-    secretEnv: ['DEPLOY_TRIGGER_PATH']
-
-availableSecrets:
-  secretManager:
-    - versionName: projects/934172637590/secrets/DEPLOY_TRIGGER_PATH
-      env: 'DEPLOY_TRIGGER_PATH'
+          "https://cloudbuild.googleapis.com/v1/projects/alamo-utec/locations/southamerica-east1/triggers/29e1c4f3-aa76-4fac-a697-ae21e5fef235:run"
 
 images:
   - 'gcr.io/alamo-utec/openai_assistant_flask'
