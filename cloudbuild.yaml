@@ -7,15 +7,14 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/alamo-utec/openai_assistant_flask']
   
-  # Paso 3: Llamada a la API de Cloud Build usando el secreto para el trigger
-  - name: 'curlimages/curl'
-    entrypoint: 'sh'
+  # Paso 3: Ejecutar el trigger de despliegue en Cloud Build
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     args:
-      - '-c'
-      - |
-        curl -X POST \
-          -H "Authorization: Bearer $(gcloud auth print-access-token)" \
-          "https://cloudbuild.googleapis.com/v1/projects/alamo-utec/locations/southamerica-east1/triggers/29e1c4f3-aa76-4fac-a697-ae21e5fef235:run"
+      - 'builds'
+      - 'triggers'
+      - 'run'
+      - 'openai-deploy-trigger'
+      - '--region=southamerica-east1'
 
 images:
   - 'gcr.io/alamo-utec/openai_assistant_flask'
