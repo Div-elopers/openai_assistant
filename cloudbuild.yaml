@@ -10,7 +10,11 @@ steps:
   # Paso 3: Ejecutar el trigger de despliegue en Cloud Build
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
-      - 'gcloud builds triggers run openai-deploy-trigger --region=southamerica-east1'
+        - 'builds'
+        - 'triggers'
+        - 'run'
+        - 'openai-deploy-trigger'
+        - '--region=southamerica-east1'
 
 images:
   - 'gcr.io/alamo-utec/openai_assistant_flask'
