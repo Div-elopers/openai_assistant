@@ -22,7 +22,6 @@ steps:
 
 availableSecrets:
   secretManager:
-    - versionName: 'projects/alamo-utec/secrets/DEPLOY_TRIGGER_PATH/versions/latest'
       env: 'DEPLOY_TRIGGER_PATH'
 
 images:
