@@ -13,15 +13,17 @@ steps:
     args:
       - '-c'
       - |
-        DEPLOY_TRIGGER_PATH=$(gcloud secrets versions access latest --secret="DEPLOY_TRIGGER_PATH")
         curl -X POST \
           -H "Authorization: Bearer $(gcloud auth print-access-token)" \
           "https://cloudbuild.googleapis.com/v1/$DEPLOY_TRIGGER_PATH:run"
     env:
-      - 'CLOUDSDK_COMPUTE_REGION=southamerica-east1'
+      - 'DEPLOY_TRIGGER_PATH'
+    secretEnv: ['DEPLOY_TRIGGER_PATH']
 
-secrets:
-  - name: DEPLOY_TRIGGER_PATH  
+availableSecrets:
+  secretManager:
+    - versionName: 'projects/alamo-utec/secrets/DEPLOY_TRIGGER_PATH/versions/latest'
+      env: 'DEPLOY_TRIGGER_PATH'
 
 images:
   - 'gcr.io/alamo-utec/openai_assistant_flask'
