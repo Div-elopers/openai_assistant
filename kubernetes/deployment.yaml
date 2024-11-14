@@ -15,6 +15,7 @@ spec:
       containers:
         - name: openai-assistant
           image: gcr.io/alamo-utec/openai_assistant_flask:latest
+          imagePullPolicy: Always  
           ports:
             - containerPort: 8080
           resources:
@@ -23,7 +24,7 @@ spec:
               cpu: "250m"
             limits:
               memory: "512Mi"
-              cpu: "1000m"  
+              cpu: "1000m"
           env:
             - name: OPENAI_API_KEY
               valueFrom:
@@ -34,4 +35,4 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: assistant-id
-                  key: ASSISTANT_ID 
+                  key: ASSISTANT_ID
