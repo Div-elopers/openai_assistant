@@ -8,8 +8,9 @@ steps:
     args: ['push', 'gcr.io/alamo-utec/openai_assistant_flask']
   
   # Paso 3: Ejecutar el trigger de despliegue en Cloud Build
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  - name: 'gcr.io/cloud-builders/gcloud'
     args:
+      - 'gcloud'
       - 'builds'
       - 'triggers'
       - 'run'
