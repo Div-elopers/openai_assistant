@@ -35,8 +35,9 @@ steps:
       - apply
       - '-f'
       - kubernetes/service.yaml
-  - name: gcr.io/cloud-builders/kubectl
+  - name: restart
     args:
+      - kubectl
       - rollout
       - restart
       - deployment/openai-assistant
