@@ -109,5 +109,9 @@ def test_send_message_to_assistant():
 def status():
     return jsonify({"status": "activo", "mensaje": "contenedor corriendo"}), 200
 
+@app.route('/hello', methods=['GET'])
+def hello():
+    return jsonify({"hello": "hola"}), 200
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
