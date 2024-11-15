@@ -1,0 +1,45 @@
+steps:
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    env:
+      - CLOUDSDK_COMPUTE_REGION=southamerica-east1
+      - CLOUDSDK_CONTAINER_CLUSTER=openai-assistant-cluster
+      - CLOUDSDK_COMPUTE_ZONE=southamerica-east1-a
+    args:
+      - container
+      - clusters
+      - get-credentials
+      - openai-assistant-cluster
+      - '--region=southamerica-east1'
+    entrypoint: gcloud
+
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - pull
+      - 'gcr.io/alamo-utec/openai_assistant_flask:latest'
+
+  - name: gcr.io/cloud-builders/kubectl
+    env:
+      - CLOUDSDK_COMPUTE_REGION=southamerica-east1
+      - CLOUDSDK_CONTAINER_CLUSTER=openai-assistant-cluster
+      - CLOUDSDK_COMPUTE_ZONE=southamerica-east1-a
+    args:
+      - apply
+      - '-f'
+      - kubernetes/deployment.yaml
+  - name: gcr.io/cloud-builders/kubectl
+    env:
+      - CLOUDSDK_COMPUTE_REGION=southamerica-east1
+      - CLOUDSDK_CONTAINER_CLUSTER=openai-assistant-cluster
+      - CLOUDSDK_COMPUTE_ZONE=southamerica-east1-a
+    args:
+      - apply
+      - '-f'
+      - kubernetes/service.yaml
+  - name: gcr.io/cloud-builders/kubectl
+    args:
+      - rollout
+      - restart
+      - deployment/openai-assistant
+    
+options:
+  logging: CLOUD_LOGGING_ONLY
