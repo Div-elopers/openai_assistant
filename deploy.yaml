@@ -35,9 +35,12 @@ steps:
       - apply
       - '-f'
       - kubernetes/service.yaml
-  - name: restart
+  - name: gcr.io/cloud-builders/kubectl
+    env:
+      - CLOUDSDK_COMPUTE_REGION=southamerica-east1
+      - CLOUDSDK_CONTAINER_CLUSTER=openai-assistant-cluster
+      - CLOUDSDK_COMPUTE_ZONE=southamerica-east1-a
     args:
-      - kubectl
       - rollout
       - restart
       - deployment/openai-assistant
